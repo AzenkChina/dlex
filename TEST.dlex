@@ -1,0 +1,378 @@
+//描述文件编写规则
+//1 // 为行注释
+//2 { 为数据项开始
+//3 } 为数据项结束
+//4 { 后紧跟数据项的 class id 和 obis
+//5 { 内第一行选择此数据项所在的suit 1~8 可以任意组合
+//6 { 内第二行是数据项的实例索引
+//7 { 内第三行以及往后是该类实例的属性和方法权限，每个属性或方法都有三个权限，不同的类属性和方法数量不一致，需要注意
+//8 某些类的属性可以携带物理意义描述符，可携带物理意义描述符的属性见下表：
+//	Data						2
+//	Register            		2 3
+//	Extended register   		2 3 5
+//	Demand register     		2 3 4
+//	Profile generic     		4 7 8
+//	Clock               		2 3
+//物理意义描述符总共6个字段，依次为
+//	item						数据项类别
+//	phase						数据项分相
+//	rate						数据项费率 0~15
+//	scale						数据项缩放
+//	type						数据项数据类型
+//	flex						item 为电能或者功率时为相位，否则自定义 0~1023
+//	
+//	item 取值：
+//		NULL					未定义
+//		P_ENERGY				有功电能（mWh）
+//		Q_ENERGY				无功电能（mVarh）
+//		S_ENERGY				视在电能（mVAh）
+//		P_POWER					有功功率（mW）
+//		Q_POWER					无功功率（mVar）
+//		S_POWER					视在功率（mVA）
+//		VOLTAGE					电压（mV）
+//		CURRENT					电流（mA）
+//		POWER_FACTOR			功率因数（1/1000）
+//		ANGLE					相角（1/1000度）
+//		FREQUENCY				频率（1/1000Hz）
+//		BIN = 24				二进制格式
+//		HEX = 25				十六进制格式
+//		DATE = 26				日期格式
+//		TIME = 27				时间格式
+//		DTIME = 28				一年内时间格式
+//		BCD = 29				BCD格式
+//		ASCII = 30				ASCII字符流格式
+//		STR = 31				二进制字符流格式
+//		
+//	phase 取值：
+//		PHASE_N					N相
+//		PHASE_A					A相
+//		PHASE_B					B相
+//		PHASE_C					C相
+//		PHASE_AB				AB
+//		PHASE_AC				AC
+//		PHASE_BC				BC
+//		PHASE_T					总
+//		
+//	scale 取值：
+//		SCALE_N8
+//		SCALE_N7
+//		SCALE_N6
+//		SCALE_N5
+//		SCALE_N4
+//		SCALE_N3
+//		SCALE_N2
+//		SCALE_N1
+//		SCALE_ZN
+//		SCALE_ZP
+//		SCALE_P1
+//		SCALE_P2
+//		SCALE_P3
+//		SCALE_P4
+//		SCALE_P5
+//		SCALE_P6
+//		SCALE_P7
+//		SCALE_P8
+//		
+//	type 取值：
+//		NULL
+//		ARRAY
+//		STRUCTURE
+//		BOOLEAN					boolean
+//		BIT_STRING				An ordered sequence of boolean values
+//		DOUBLE_LONG				Integer32
+//		DOUBLE_LONG_UNSIGNED	Unsigned32
+//		OCTET_STRING			An ordered sequence of octets (8 bit bytes)
+//		VISIBLE_STRING			An ordered sequence of ASCII characters
+//		UTF8_STRING				An ordered sequence of characters encoded as UTF-8
+//		BCD						binary coded decimal
+//		INTEGER					Integer8
+//		LONG					Integer16
+//		UNSIGNED				Unsigned8
+//		LONG_UNSIGNED			Unsigned16
+//		COMPACT_ARRAY
+//		LONG64					Integer64
+//		LONG64_UNSIGNED			Unsigned64
+//		ENUM					enum
+//		FLOAT32					OCTET STRING (SIZE(4))
+//		FLOAT64					OCTET STRING (SIZE(8))
+//		DATE_TIME				OCTET STRING SIZE(12))
+//		DATE					OCTET STRING (SIZE(5))
+//		TIME					OCTET STRING (SIZE(4))
+//		
+//	flex 取值：
+//		QUAD_N					无
+//		QUAD_I					1象限
+//		QUAD_II					2象限
+//		QUAD_III				3象限
+//		QUAD_V					4象限
+//		QUAD_NI					减1象限
+//		QUAD_NII				减2象限
+//		QUAD_NIII				减3象限
+//		QUAD_NV					减4象限
+
+{ version
+	1
+}
+
+{ 1 0 0 42 0 0 255 //logical device name
+
+	//suit
+	1 2 3 4 5 6 7 8
+
+	0 //oid
+
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ ASCII PHASE_N 0 SCALE_ZP VISIBLE_STRING 0
+	
+	//method right
+	//lowest low high
+}
+
+{ 3 1 0 32 7 0 255 //A相电压
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ VOLTAGE PHASE_A 0 SCALE_ZP DOUBLE_LONG_UNSIGNED 0
+	ATTR_READ ATTR_READ ATTR_READ VOLTAGE PHASE_A 0 SCALE_ZP DOUBLE_LONG_UNSIGNED 0
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 52 7 0 255 //B相电压
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ VOLTAGE PHASE_B 0 SCALE_ZP DOUBLE_LONG_UNSIGNED 0
+	ATTR_READ ATTR_READ ATTR_READ VOLTAGE PHASE_B 0 SCALE_ZP DOUBLE_LONG_UNSIGNED 0
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 72 7 0 255 //C相电压
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ VOLTAGE PHASE_C 0 SCALE_ZP DOUBLE_LONG_UNSIGNED 0
+	ATTR_READ ATTR_READ ATTR_READ VOLTAGE PHASE_C 0 SCALE_ZP DOUBLE_LONG_UNSIGNED 0
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 31 7 0 255 //A相电流
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ CURRENT PHASE_A 0 SCALE_ZP DOUBLE_LONG 0
+	ATTR_READ ATTR_READ ATTR_READ CURRENT PHASE_A 0 SCALE_ZP DOUBLE_LONG 0
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 51 7 0 255 //B相电流
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ CURRENT PHASE_B 0 SCALE_ZP DOUBLE_LONG 0
+	ATTR_READ ATTR_READ ATTR_READ CURRENT PHASE_B 0 SCALE_ZP DOUBLE_LONG 0
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 71 7 0 255 //C相电流
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ CURRENT PHASE_C 0 SCALE_ZP DOUBLE_LONG 0
+	ATTR_READ ATTR_READ ATTR_READ CURRENT PHASE_C 0 SCALE_ZP DOUBLE_LONG 0
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 1 8 0 255 //正向有功总电能
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_V
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_V
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 2 8 0 255 //反向有功总电能
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_II|QUAD_III
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_II|QUAD_III
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 3 8 0 255 //正向无功总电能
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ Q_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_II
+	ATTR_READ ATTR_READ ATTR_READ Q_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_II
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 4 8 0 255 //反向无功总电能
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ Q_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_III|QUAD_V
+	ATTR_READ ATTR_READ ATTR_READ Q_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_III|QUAD_V
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 3 8 0 255 //正向视在总电能
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ S_POWER PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_V
+	ATTR_READ ATTR_READ ATTR_READ S_POWER PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_V
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 4 8 0 255 //反向视在总电能
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ S_POWER PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_II|QUAD_III
+	ATTR_READ ATTR_READ ATTR_READ S_POWER PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_II|QUAD_III
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 15 0 0 40 0 0 255 //association ln
+
+	//suit
+	1 2 3 4 5 6 7
+
+	0 //oid
+
+	//attribute right
+	//lowest low high
+	ATTR_NONE ATTR_NONE ATTR_READ
+	ATTR_NONE ATTR_NONE ATTR_READ
+	ATTR_NONE ATTR_NONE ATTR_READ
+	ATTR_NONE ATTR_NONE ATTR_READ
+	ATTR_NONE ATTR_NONE ATTR_READ
+	ATTR_NONE ATTR_NONE ATTR_READ
+	ATTR_NONE ATTR_NONE ATTR_READ|ATTR_WRITE
+	ATTR_NONE ATTR_NONE ATTR_READ
+	ATTR_NONE ATTR_NONE ATTR_READ
+	ATTR_NONE ATTR_NONE ATTR_READ
+	ATTR_NONE ATTR_NONE ATTR_READ
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_AUTHREQ
+	METHOD_NONE METHOD_NONE METHOD_AUTHREQ
+	METHOD_NONE METHOD_NONE METHOD_NONE
+	METHOD_NONE METHOD_NONE METHOD_NONE
+	METHOD_NONE METHOD_NONE METHOD_NONE
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
