@@ -745,8 +745,7 @@ bool lexcion::significance(uint8_t index, queue<string> &t, union __cosem_entry_
   * ÅÅÐò±È½ÏÆ÷
   *
   */
-bool lexcion::comp(union __cosem_entry_file &a, union __cosem_entry_file &b)
-{
+bool lexcion::comp(union __cosem_entry_file &a, union __cosem_entry_file &b) {
 	return((a.key < b.key));
 }
 
@@ -1129,6 +1128,5 @@ int main(int argc, char** argv) {
 	cout << "please check if it's same to your target machine." << endl;
 
 	getchar();
-
 	return(0);
 }
