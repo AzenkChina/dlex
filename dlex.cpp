@@ -793,7 +793,7 @@ bool lexcion::append(vector<string> &v) {
 		//第一行，解析 version 或者 class 和 obis
 		if((iter - v.begin()) == 0) {
 			if(token.size() < 2) {
-				cout << "Too less element in this line :"<< *iter << "." << endl;
+				cout << "Too less element in this line : "<< *iter << "." << endl;
 				return(false);
 			}
 
@@ -808,7 +808,7 @@ bool lexcion::append(vector<string> &v) {
 				isver = true;
 			}
 			else if(token.size() < 7) {
-				cout << "Too less element in this line :"<< *iter << "." << endl;
+				cout << "Too less element in this line : "<< *iter << "." << endl;
 				return(false);
 			}
 			else {
@@ -818,7 +818,7 @@ bool lexcion::append(vector<string> &v) {
 					out << token.front();
 					out >> c;
 					if((c < 0) || (c > 255)) {
-						cout << "Number overflow :"<< *iter << "." << endl;
+						cout << "Number overflow : "<< *iter << "." << endl;
 						return(false);
 					}
 					else {
@@ -833,7 +833,7 @@ bool lexcion::append(vector<string> &v) {
 				method = lexcion::methods((entry.key >> 56) & 0xff);
 
 				if((attribute + method) == 0) {
-					cout << "This class have no attribute and method :"<< *iter << "." << endl;
+					cout << "This class have no attribute and method : "<< *iter << "." << endl;
 					return(false);
 				}
 			}
@@ -846,7 +846,7 @@ bool lexcion::append(vector<string> &v) {
 				out << token.front();
 				out >> c;
 				if(c < 0) {
-					cout << "Number overflow :"<< *iter << "." << endl;
+					cout << "Number overflow : "<< *iter << "." << endl;
 					return(false);
 				}
 				else {
@@ -862,7 +862,7 @@ bool lexcion::append(vector<string> &v) {
 					out << token.front();
 					out >> c;
 					if((c < 1) || (c > 8)) {
-						cout << "Number overflow :"<< *iter << "." << endl;
+						cout << "Number overflow : "<< *iter << "." << endl;
 						return(false);
 					}
 					else {
@@ -877,11 +877,11 @@ bool lexcion::append(vector<string> &v) {
 		else if((iter - v.begin()) == 2) {
 			if(isver == true) {
 				if((iter - v.begin()) != 2) {
-					cout << "Closure <version> not clean:"<< *iter << "." << endl;
+					cout << "Closure <version> not clean : "<< *iter << "." << endl;
 					return(false);
 				}
 				if(token.front() != "}") {
-					cout << "Closure <version> not clean:"<< *iter << "." << endl;
+					cout << "Closure <version> not clean : "<< *iter << "." << endl;
 					return(false);
 				}
 				else {
@@ -894,7 +894,7 @@ bool lexcion::append(vector<string> &v) {
 				out << token.front();
 				out >> c;
 				if(c < 0) {
-					cout << "Number overflow :"<< *iter << "." << endl;
+					cout << "Number overflow : "<< *iter << "." << endl;
 					return(false);
 				}
 				else {
@@ -914,12 +914,12 @@ bool lexcion::append(vector<string> &v) {
 				return(true);
 			}
 			else if(token.size() < 3) {
-				cout << "Too less element in this line :"<< *iter << "." << endl;
+				cout << "Too less element in this line : "<< *iter << "." << endl;
 				return(false);
 			}
 			else {
 				if(lexcion::rights(((iter - v.begin()) - 3), token, entry) != true) {
-					cout << "Rights or significance analysing faild :"<< *iter << "." << endl;
+					cout << "Rights or significance analysing faild : "<< *iter << "." << endl;
 					return(false);
 				}
 			}
@@ -935,7 +935,7 @@ bool lexcion::append(vector<string> &v) {
   */
 bool lexcion::finish() {
 	struct __cosem_param param;
-	
+
 	if(this->version == 0) {
 		cout << "No version field specified." << endl;
 		return(false);
@@ -997,7 +997,7 @@ bool lexcion::finish() {
 	out.write(reinterpret_cast<char *>(&param), (sizeof(param) - sizeof(param.entry)));
 	out.write(reinterpret_cast<char *>(&param.entry), (sizeof(param.entry[0]) * param.header.amount));
 	out.close();
-	
+
 	cout << this->list.size() << " entries found." << endl;
 
 	return(true);
@@ -1038,12 +1038,10 @@ int main(int argc, char** argv) {
 				iter->erase(iter->find("//"));
 			}
 		}
-
 		//替换tab为空格
 		if(!iter->empty()) {
 			replace(iter->begin(), iter->end(), '\t', ' ');
 		}
-
 		//去除行首空格
 		if(!iter->empty()) {
 			iter->erase(0,iter->find_first_not_of(" "));
@@ -1069,6 +1067,7 @@ int main(int argc, char** argv) {
 		getchar();
 		return(0);
 	}
+
 	vector<string> closure;
 	for(vector<string>::iterator iter = file_trim.begin(); iter != file_trim.end(); iter++) {
 		if(iter->empty()) {
@@ -1081,26 +1080,31 @@ int main(int argc, char** argv) {
 			closure.push_back(*iter);
 		}
 		else if(iter->find("{") != iter->npos) {
-			cout << "\"{\" not at the first of line, string is :"<< *iter << "." << endl;
+			cout << "\"{\" not at the first of line, string is : "<< *iter << "." << endl;
 			getchar();
 			return(0);
 		}
 		else if(iter->find("}") == 0) {
 			closure.push_back(*iter);
+			if((closure.size() < 3) || (closure.size() > 28)) {
+				cout << "Closure size is not acceptable, string is : " << closure.front() << "." << endl;
+				getchar();
+				return(0);
+			}
 			//closure 保存了两个花括号内的数据内容
 			if(lex.append(closure) != true) {
 				cout << "Append closure failed." << endl;
 				getchar();
 				return(0);
 			}
+			closure.clear();
 		}
 		else if(iter->find("}") != iter->npos) {
-			cout << "\"}\" not at the first of line, string is :" << *iter << "." << endl;
+			cout << "\"}\" not at the first of line, string is : " << *iter << "." << endl;
 			getchar();
 			return(0);
 		}
-		else
-		{
+		else {
 			closure.push_back(*iter);
 		}
 	}
