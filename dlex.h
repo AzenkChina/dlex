@@ -6,6 +6,9 @@
 #include "stdint.h"
 
 /* Exported types ------------------------------------------------------------*/
+#pragma pack(push)
+#pragma pack(4)
+
 /**
   * @brief  类型
   */
@@ -293,5 +296,7 @@ struct __cosem_param
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
+
+#pragma pack(pop)
 
 #endif /* __DLEX_H__ */

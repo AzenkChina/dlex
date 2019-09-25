@@ -109,11 +109,11 @@ uint32_t lexcion::crc(const void *cp, uint16_t length) {
 	uint32_t val = 0;
 	const uint8_t *p = (const uint8_t *)cp;
 
-	if(!p){
+	if(!p) {
 		return 0;
 	}
 
-	for(cnt=0; cnt<length; cnt++){
+	for(cnt=0; cnt<length; cnt++) {
 		val = (val << 8) ^ crc32tab[(val >> 24) ^ p[cnt]];
 	}
 
@@ -741,6 +741,7 @@ bool lexcion::significance(uint8_t index, queue<string> &t, union __cosem_entry_
 
 	return(true);
 }
+
 /**
   * ÅÅÐò±È½ÏÆ÷
   *
@@ -955,7 +956,7 @@ bool lexcion::finish() {
 	for(uint16_t loop = 0; loop < 8; loop++) {
 		param.header.spread[loop] = 0;
 		for(vector<union __cosem_entry_file>::iterator iter = this->list.begin(); iter != this->list.end(); iter++) {
-			if((iter->key) | (1<<loop)) {
+			if((iter->key) & (1<<loop)) {
 				param.header.spread[loop] += 1;
 			}
 		}
@@ -988,7 +989,7 @@ bool lexcion::finish() {
 
 	param.info.check = lexcion::crc(&param.info, (sizeof(struct __cosem_param_info) - sizeof(uint32_t)));
 
-	ofstream out("dlex.bin", ios::binary);
+	ofstream out("lexicon", ios::binary);
 
 	if(!out.is_open()) {
 		cout << "File can't create." << endl;
