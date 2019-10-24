@@ -127,12 +127,14 @@ enum __metering_quad
 	M_QUAD_I = 0x01,//1象限
 	M_QUAD_II = 0x02,//2象限
 	M_QUAD_III = 0x04,//3象限
-    M_QUAD_V = 0x08,//4象限
+    M_QUAD_IV = 0x08,//4象限
     
 	M_QUAD_NI = 0x10,//减1象限
 	M_QUAD_NII = 0x20,//减2象限
 	M_QUAD_NIII = 0x40,//减3象限
-    M_QUAD_NV = 0x80,//减4象限
+    M_QUAD_NIV = 0x80,//减4象限
+	
+	M_QUAD_DEMAND = 0x100,//标识该数据是需量而不是功率
 };
 
 /**

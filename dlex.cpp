@@ -703,8 +703,8 @@ bool lexcion::significance(uint8_t index, queue<string> &t, union __cosem_entry_
 			if(t.front().find("QUAD_III") != t.front().npos) {
 				val |= (M_QUAD_III<<0); is_quad = true;
 			}
-			if(t.front().find("QUAD_V") != t.front().npos) {
-				val |= (M_QUAD_V<<0); is_quad = true;
+			if(t.front().find("QUAD_IV") != t.front().npos) {
+				val |= (M_QUAD_IV<<0); is_quad = true;
 			}
 			if(t.front().find("QUAD_NI") != t.front().npos) {
 				val |= (M_QUAD_NI<<0); is_quad = true;
@@ -715,8 +715,11 @@ bool lexcion::significance(uint8_t index, queue<string> &t, union __cosem_entry_
 			if(t.front().find("QUAD_NIII") != t.front().npos) {
 				val |= (M_QUAD_NIII<<0); is_quad = true;
 			}
-			if(t.front().find("QUAD_NV") != t.front().npos) {
-				val |= (M_QUAD_NV<<0); is_quad = true;
+			if(t.front().find("QUAD_NIV") != t.front().npos) {
+				val |= (M_QUAD_NIV<<0); is_quad = true;
+			}
+			if(t.front().find("QUAD_DEMAND") != t.front().npos) {
+				val |= (M_QUAD_DEMAND<<0); is_quad = true;
 			}
 
 			if(!is_quad) {
