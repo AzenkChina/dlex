@@ -1,0 +1,5 @@
+build in windows:
+cmake CMakeLists.txt -G "MinGW Makefiles" -BWIN32
+
+build in linux:
+cmake CMakeLists.txt -BLINUX
