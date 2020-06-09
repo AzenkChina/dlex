@@ -84,6 +84,50 @@ enum __meta_scale
 };
 
 /**
+  * @brief  象限标识
+  */
+enum __meta_quad
+{
+    M_QUAD_N = 0x00,//无
+	M_QUAD_I = 0x01,//1象限
+	M_QUAD_II = 0x02,//2象限
+	M_QUAD_III = 0x04,//3象限
+    M_QUAD_IV = 0x08,//4象限
+    
+	M_QUAD_NI = 0x10,//减1象限
+	M_QUAD_NII = 0x20,//减2象限
+	M_QUAD_NIII = 0x40,//减3象限
+    M_QUAD_NIV = 0x80,//减4象限
+	
+	M_QUAD_DEMAND = 0x100,//标识该数据是需量而不是功率
+};
+
+/**
+  * @brief  历史记录
+  */
+enum __meta_history
+{
+	M_HIST = 0x200,//历史记录标记（上0次）
+	M_HIST_01 = 0x210,//上1次
+	M_HIST_02 = 0x220,//上2次
+	M_HIST_03 = 0x230,//上3次
+	M_HIST_04 = 0x240,//上4次
+	M_HIST_05 = 0x250,//上5次
+	M_HIST_06 = 0x260,//上6次
+	M_HIST_07 = 0x270,//上7次
+	M_HIST_08 = 0x280,//上8次
+	M_HIST_09 = 0x290,//上9次
+	M_HIST_10 = 0x2a0,//上10次
+	M_HIST_11 = 0x2b0,//上11次
+	M_HIST_12 = 0x2c0,//上12次
+	M_HIST_13 = 0x2d0,//上13次
+	M_HIST_14 = 0x2e0,//上14次
+	M_HIST_15 = 0x2f0,//上15次
+};
+
+
+
+/**
   * @brief   AXDR 数据类型
   */
 enum __axdr_type
@@ -116,25 +160,6 @@ enum __axdr_type
     AXDR_DATE_TIME,             // 25 OCTET STRING SIZE(12))
     AXDR_DATE,                  // 26 OCTET STRING (SIZE(5))
     AXDR_TIME,                  // 27 OCTET STRING (SIZE(4))
-};
-
-/**
-  * @brief  象限标识
-  */
-enum __metering_quad
-{
-    M_QUAD_N = 0x00,//无
-	M_QUAD_I = 0x01,//1象限
-	M_QUAD_II = 0x02,//2象限
-	M_QUAD_III = 0x04,//3象限
-    M_QUAD_IV = 0x08,//4象限
-    
-	M_QUAD_NI = 0x10,//减1象限
-	M_QUAD_NII = 0x20,//减2象限
-	M_QUAD_NIII = 0x40,//减3象限
-    M_QUAD_NIV = 0x80,//减4象限
-	
-	M_QUAD_DEMAND = 0x100,//标识该数据是需量而不是功率
 };
 
 /**

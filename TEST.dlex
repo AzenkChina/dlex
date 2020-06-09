@@ -19,8 +19,9 @@
 //	rate						数据项费率 0~15
 //	scale						数据项缩放
 //	type						数据项数据类型
-//	flex						item 为电能或者功率时为相位，否则自定义 0~1023
-//	
+//	flex						item 是电能或者功率时为相位或者相位和历史记录的组合
+//								item 不是电能或者功率时为历史记录或者数字（0~1023）
+//
 //	item 取值：
 //		NULL					未定义
 //		P_ENERGY				有功电能（mWh）
@@ -110,6 +111,21 @@
 //		QUAD_NIII				减3象限
 //		QUAD_NIV				减4象限
 //		QUAD_DEMAND				代表是需量而不是功率
+//		HIST_01					历史上1次
+//		HIST_02					历史上2次
+//		HIST_03					历史上3次
+//		HIST_04					历史上4次
+//		HIST_05					历史上5次
+//		HIST_06					历史上6次
+//		HIST_07					历史上7次
+//		HIST_08					历史上8次
+//		HIST_09					历史上9次
+//		HIST_10					历史上10次
+//		HIST_11					历史上11次
+//		HIST_12					历史上12次
+//		HIST_13					历史上13次
+//		HIST_14					历史上14次
+//		HIST_15					历史上15次
 
 { version
 	1
@@ -341,6 +357,60 @@
 	ATTR_READ ATTR_READ ATTR_READ
 	ATTR_READ ATTR_READ ATTR_READ S_POWER PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_II|QUAD_III
 	ATTR_READ ATTR_READ ATTR_READ S_POWER PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_II|QUAD_III
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 1 8 0 201 //正向有功总电能（上一月）
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_IV|HIST_01
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_IV|HIST_01
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 1 8 0 202 //正向有功总电能（上二月）
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_IV|HIST_02
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_IV|HIST_02
+	
+	//method right
+	//lowest low high
+	METHOD_NONE METHOD_NONE METHOD_NONE
+}
+
+{ 3 1 0 1 8 0 203 //正向有功总电能（上三月）
+
+	//suit
+	1 2 3 4 5 6 7
+	
+	0 //oid
+	
+	//attribute right
+	//lowest low high
+	ATTR_READ ATTR_READ ATTR_READ
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_IV|HIST_03
+	ATTR_READ ATTR_READ ATTR_READ P_ENERGY PHASE_T 0 SCALE_ZP DOUBLE_LONG_UNSIGNED QUAD_I|QUAD_IV|HIST_03
 	
 	//method right
 	//lowest low high

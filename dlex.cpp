@@ -694,6 +694,7 @@ bool lexcion::significance(uint8_t index, queue<string> &t, union __cosem_entry_
 		}
 		else if(cnt == 5) {
 			bool is_quad = false;
+			bool have_minus = false;
 			if(t.front().find("QUAD_I") != t.front().npos) {
 				val |= (M_QUAD_I<<0); is_quad = true;
 			}
@@ -707,19 +708,124 @@ bool lexcion::significance(uint8_t index, queue<string> &t, union __cosem_entry_
 				val |= (M_QUAD_IV<<0); is_quad = true;
 			}
 			if(t.front().find("QUAD_NI") != t.front().npos) {
-				val |= (M_QUAD_NI<<0); is_quad = true;
+				val |= (M_QUAD_NI<<0); is_quad = true; have_minus = true;
 			}
 			if(t.front().find("QUAD_NII") != t.front().npos) {
-				val |= (M_QUAD_NII<<0); is_quad = true;
+				val |= (M_QUAD_NII<<0); is_quad = true; have_minus = true;
 			}
 			if(t.front().find("QUAD_NIII") != t.front().npos) {
-				val |= (M_QUAD_NIII<<0); is_quad = true;
+				val |= (M_QUAD_NIII<<0); is_quad = true; have_minus = true;
 			}
 			if(t.front().find("QUAD_NIV") != t.front().npos) {
-				val |= (M_QUAD_NIV<<0); is_quad = true;
+				val |= (M_QUAD_NIV<<0); is_quad = true; have_minus = true;
 			}
 			if(t.front().find("QUAD_DEMAND") != t.front().npos) {
 				val |= (M_QUAD_DEMAND<<0); is_quad = true;
+			}
+			if(t.front().find("HIST_01") != t.front().npos) {
+				val |= (M_HIST_01<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_02") != t.front().npos) {
+				val |= (M_HIST_02<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_03") != t.front().npos) {
+				val |= (M_HIST_03<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_04") != t.front().npos) {
+				val |= (M_HIST_04<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_05") != t.front().npos) {
+				val |= (M_HIST_05<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_06") != t.front().npos) {
+				val |= (M_HIST_06<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_07") != t.front().npos) {
+				val |= (M_HIST_07<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_08") != t.front().npos) {
+				val |= (M_HIST_08<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_09") != t.front().npos) {
+				val |= (M_HIST_09<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_10") != t.front().npos) {
+				val |= (M_HIST_10<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_11") != t.front().npos) {
+				val |= (M_HIST_11<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_12") != t.front().npos) {
+				val |= (M_HIST_12<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_13") != t.front().npos) {
+				val |= (M_HIST_13<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_14") != t.front().npos) {
+				val |= (M_HIST_14<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
+			}
+			if(t.front().find("HIST_15") != t.front().npos) {
+				val |= (M_HIST_15<<0); is_quad = true;
+				if(have_minus) {
+					cout << "Flexable corrupted."<< endl;
+					return(false);
+				}
 			}
 
 			if(!is_quad) {
